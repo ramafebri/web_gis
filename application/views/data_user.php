@@ -275,7 +275,11 @@ $(document).ready(function(){
                         </div>
                         <div class="form-group">
                             <label>Level</label>
-                             <input type="text" class="form-control" name="u_level" value="" required>
+							 <select id="cars" class="form-control" name="u_level">
+								<option value="admin">Admin</option>
+								<option value="operator">Operator</option>
+								<option value="regular">Regular</option>
+							</select>
                         </div>
                     </div>    
                     <div class="modal-footer">
@@ -311,7 +315,11 @@ $(document).ready(function(){
                         </div>
                         <div class="form-group">
                             <label>Level</label>
-                             <input type="text" class="form-control" name="u_level" id="level_User" value="" required>
+							<select id="cars" class="form-control" name="u_level" id="level_User">
+								<option value="admin">Admin</option>
+								<option value="operator">Operator</option>
+								<option value="regular">Regular</option>
+							</select>
                         </div>										
 					</div>
 					<div class="modal-footer">

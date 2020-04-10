@@ -247,7 +247,7 @@ $(document).ready(function(){
                 </tbody>
             </table>
 			<div class="clearfix">
-                <div class="hint-text">Showing <b>all</b> data</div>
+				<div class="hint-text">Showing <b>all</b> data <br><a href="<?php echo base_url() ?>index.php/user/export">Export to Excel</a></div>	
             </div>
         </div>
     </div>

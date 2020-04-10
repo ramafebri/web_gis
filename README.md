@@ -11,6 +11,8 @@ Features of this web app:
 5. Logout <br>
 6. Register <br>
 7. Profile Page <br>
+8. Export data landmark to Excel <br>
+9. Export data user to Excel
 
 ## Installation
 1. Clone or download this repositroy <br>

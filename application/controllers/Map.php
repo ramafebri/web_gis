@@ -26,10 +26,26 @@ class Map extends CI_Controller {
 
 	//<-Function which used in Map -> 
 	public function addMarker(){
+		$foto = $_FILES['l_foto'];
+		if($foto == ''){
+
+		}else{
+			$config['upload_path']          = './assets/uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('l_foto')) {
+				$foto = $this->upload->data("file_name");
+			}else{
+				echo "upload gagal";
+			}
+		}
+
 		$data['bangunan_nama'] = $this->input->post('l_name');
 		$data['bangunan_lat'] = $this->input->post('l_lat'); 
 		$data['bangunan_long'] = $this->input->post('l_long');
-        $data['keterangan'] = $this->input->post('l_info');
+		$data['keterangan'] = $this->input->post('l_info');
+		$data['gambar'] = $foto;
 
 		$result = $this->MapModel->addMarkers($data);
 		if($result){
@@ -53,13 +69,27 @@ class Map extends CI_Controller {
 	}
 
 	public function updateMarker(){
+		$foto = $_FILES['l_foto'];
+		if($foto == ''){
+
+		}else{
+			$config['upload_path']          = './assets/uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('l_foto')) {
+				$foto = $this->upload->data("file_name");
+			}else{
+				echo "upload gagal";
+			}
+		}
+
 		$data['bangunan_id'] = $this->input->post('l_id');
 		$data['bangunan_nama'] = $this->input->post('l_name');
 		$data['bangunan_lat'] = $this->input->post('l_lat'); 
 		$data['bangunan_long'] = $this->input->post('l_long');
 		$data['keterangan'] = $this->input->post('l_info');
-		
-		var_dump($data);
+		$data['gambar'] = $foto;
 		   
 		$result = $this->MapModel->updateMarkers($data);
 		if($result){
@@ -74,10 +104,26 @@ class Map extends CI_Controller {
 	
 	//<-Function which used in Landmark Page ->
 	public function addMarker1(){
+		$foto = $_FILES['l_foto'];
+		if($foto == ''){
+
+		}else{
+			$config['upload_path']          = './assets/uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('l_foto')) {
+				$foto = $this->upload->data("file_name");
+			}else{
+				echo "upload gagal";
+			}
+		}
+
 		$data['bangunan_nama'] = $this->input->post('l_name');
 		$data['bangunan_lat'] = $this->input->post('l_lat'); 
 		$data['bangunan_long'] = $this->input->post('l_long');
-        $data['keterangan'] = $this->input->post('l_info');
+		$data['keterangan'] = $this->input->post('l_info');
+		$data['gambar'] = $foto;
 
 		$result = $this->MapModel->addMarkers($data);
 		if($result){
@@ -113,11 +159,27 @@ class Map extends CI_Controller {
 	}
 
 	public function updateMarker1(){
+		$foto = $_FILES['l_foto'];
+		if($foto == ''){
+
+		}else{
+			$config['upload_path']          = './assets/uploads/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			
+			$this->load->library('upload', $config);
+			if ($this->upload->do_upload('l_foto')) {
+				$foto = $this->upload->data("file_name");
+			}else{
+				echo "upload gagal";
+			}
+		}
+
 		$data['bangunan_id'] = $this->input->post('l_id');
 		$data['bangunan_nama'] = $this->input->post('l_name');
 		$data['bangunan_lat'] = $this->input->post('l_lat'); 
 		$data['bangunan_long'] = $this->input->post('l_long');
 		$data['keterangan'] = $this->input->post('l_info');
+		$data['gambar'] = $foto;
 		   
 		$result = $this->MapModel->updateMarkers($data);
 		if($result){

@@ -104,7 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
       // create popup contents
-      var customPopup = "<h7><b>Info Landmark</b></h7><br>"+'<h7>Nama: </h7>'+result[i].bangunan_nama+"<br/>"+"<h7>Detail : </h7>"+result[i].keterangan+"<br/><a href='<?=base_url()?>index.php/map/deleteMarker/"+result[i].bangunan_id+"'>Delete</a>&nbsp;&nbsp;<a href='<?=base_url()?>index.php/page/update_landmark/"+result[i].bangunan_id+"'>Update</a>";
+      var customPopup = "<center><h5><b>Landmark Information</b></h5></center><br>"+'<h7>Name: </h7>'+result[i].bangunan_nama+"<br/>"+"<img src='<?=base_url()?>assets/uploads/"+result[i].gambar+"' alt='map photo' width='350px'/><br><h7>Detail : </h7>"+result[i].keterangan+"<br/><a href='<?=base_url()?>index.php/map/deleteMarker/"+result[i].bangunan_id+"'>Delete</a>&nbsp;&nbsp;&nbsp;<a href='<?=base_url()?>index.php/page/update_landmark/"+result[i].bangunan_id+"'>Update</a>";
 
       // specify popup options 
       var customOptions =
@@ -131,7 +131,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
       alert(e.latlng);
 
-      var addPopup =  "<h5>Add Landmark</h5><br>"+latlng+"<form action=\"<?=base_url()?>index.php/map/addMarker\" method=\"POST\"> <label for=\"landmark_nama\">Nama Landmark:</label><br><input type=\"text\" id=\"l_name\" name=\"l_name\" required><br>\ <label for=\"landmark_latitude\">Latitude:</label><br><input type=\"text\" id=\"l_lat\" name=\"l_lat\" required><br><label for=\"landmark_longitude\">Longitude:</label><br><input type=\"text\" id=\"l_long\" name=\"l_long\" required><br><label for=\"landmark_info\">Info Detail:</label><br><input type=\"text\" id=\"l_info\" name=\"l_info\" required><br><br><input type=\"submit\" value=\"Submit\"></form>";
+      var addPopup =  "<h5>Add Landmark</h5><br>"+latlng+"<form action=\"<?=base_url()?>index.php/map/addMarker\" method=\"POST\" enctype=\"multipart/form-data\"> <label for=\"landmark_nama\">Name:</label><br><input type=\"text\" id=\"l_name\" name=\"l_name\" required><br>\ <label for=\"landmark_latitude\">Latitude:</label><br><input type=\"text\" id=\"l_lat\" name=\"l_lat\" required><br><label for=\"landmark_longitude\">Longitude:</label><br><input type=\"text\" id=\"l_long\" name=\"l_long\" required><br><label for=\"landmark_info\">Detail Information:</label><br><input type=\"text\" id=\"l_info\" name=\"l_info\" required><br><label for=\"landmark_foto\">Photo:</label><br><input type=\"file\" id=\"l_foto\" name=\"l_foto\" required><br><br><input type=\"submit\" value=\"Submit\"></form>";
       
       var customOptions =
         {

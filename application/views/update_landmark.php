@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Landmark Update Form</title>
+    <title>Web GIS</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link href="<?=base_url()?>assets/leaflet/leaflet.css" rel="stylesheet">
@@ -138,7 +138,7 @@
 
   <div style="background-image: url('https://image.freepik.com/free-photo/abstract-background-cement-wall-shadow-light-concept_53876-31788.jpg'); height:100%; margin:auto;">
     <div class="testbox">
-      <form action="<?=base_url()?>index.php/map/updateMarker" method="POST">
+      <form action="<?=base_url()?>index.php/map/updateMarker" method="POST" enctype="multipart/form-data">
         <div class="banner">
           <h1>Landmark Update Form</h1>
         </div>
@@ -168,6 +168,10 @@
         <div class="item">
           <p><b>Detail info</b></p>
           <input type="text" name="l_info" value="<?php echo $info ?>" required/>
+        </div>
+        <div class="item">
+          <p><b>Foto</b></p>
+          <input type="file" name="l_foto" value="" required/>
         </div>
         <div class="btn-block">
           <button type="submit" href="/">APPLY</button>

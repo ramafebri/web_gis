@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Web GIS</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -281,13 +281,14 @@
                 </div>
             </div>
             <table class="table table-striped table-hover">
-                <thead>
+			<thead>
                     <tr>
 						<th>Id</th>
                         <th>Name</th>
                         <th>Latitude</th>
 						<th>Longitude</th>
                         <th>Detail Information</th>
+						<th>Photo</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -301,8 +302,9 @@
                         <td><?php echo $landmarks->bangunan_lat?></td>
 						<td><?php echo $landmarks->bangunan_long?></td>
                         <td><?php echo $landmarks->keterangan?></td>
+						<td><img src='<?=base_url()?>assets/uploads/<?php echo $landmarks->gambar?>' alt='maptime logo gif' width='100px' height='70px'/></td>
                         <td>
-                            <a href="#editLandmarkModal" class="edit" data-toggle="modal" onclick="getData('<?php echo $landmarks->bangunan_id?>', '<?php echo $landmarks->bangunan_nama?>', '<?php echo $landmarks->bangunan_lat?>', '<?php echo $landmarks->bangunan_long?>', '<?php echo $landmarks->keterangan?>')"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#editLandmarkModal" class="edit" data-toggle="modal" onclick="getData('<?php echo $landmarks->bangunan_id?>', '<?php echo $landmarks->bangunan_nama?>', '<?php echo $landmarks->bangunan_lat?>', '<?php echo $landmarks->bangunan_long?>', '<?php echo $landmarks->keterangan?>', '<?php echo $landmarks->gambar?>')"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteLandmarkModalID" class="delete" data-toggle="modal" onclick="getID(<?php echo $landmarks->bangunan_id?>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -318,7 +320,7 @@
 	<div id="addLandmarkModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="<?=base_url()?>index.php/map/addMarker1" method="POST">
+				<form action="<?=base_url()?>index.php/map/addMarker1" method="POST" enctype="multipart/form-data">
 					<div class="modal-header">						
 						<h4 class="modal-title">Add Landmark</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -342,6 +344,10 @@
 						<div class="form-group">
 							<label>Detail Information</label>
 							<input type="text" class="form-control" name="l_info" required>
+						</div>
+						<div class="form-group">
+							<label>Photo</label>
+							<input type="file" class="form-control" name="l_foto" required>
 						</div>					
 					</div>
 					<div class="modal-footer">
@@ -356,7 +362,7 @@
 	<div id="editLandmarkModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="<?=base_url()?>index.php/map/updateMarker1" method="POST">
+				<form action="<?=base_url()?>index.php/map/updateMarker1" method="POST" enctype="multipart/form-data">
 					<div class="modal-header">						
 						<h4 class="modal-title">Edit Landmark</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="deleteMarker()">&times;</button>
@@ -381,7 +387,11 @@
                         <div class="form-group">
                             <label>Detail Information</label>
                              <input type="text" class="form-control" name="l_info" id="info_landmark" value="" required>
-                        </div>										
+                        </div>
+						<div class="form-group">
+							<label>Photo</label>
+							<input type="file" class="form-control" name="l_foto" required>
+						</div>										
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" onclick="deleteMarker()"></input>
@@ -512,6 +522,7 @@
         document.getElementById("lat_landmark").value = lat;
         document.getElementById("long_landmark").value = long;
         document.getElementById("info_landmark").value = info;
+		document.getElementById("foto_landmark").value = gambar;
     }
 
 	function deleteMarker(){

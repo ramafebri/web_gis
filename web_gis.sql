@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Apr 2020 pada 17.50
+-- Waktu pembuatan: 12 Apr 2020 pada 13.45
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -32,17 +32,18 @@ CREATE TABLE `bangunan` (
   `bangunan_nama` varchar(255) NOT NULL,
   `bangunan_lat` varchar(255) NOT NULL,
   `bangunan_long` varchar(255) NOT NULL,
-  `keterangan` varchar(255) NOT NULL
+  `keterangan` varchar(255) NOT NULL,
+  `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `bangunan`
 --
 
-INSERT INTO `bangunan` (`bangunan_id`, `bangunan_nama`, `bangunan_lat`, `bangunan_long`, `keterangan`) VALUES
-(1, 'New York', '-41.291153', '174.776838', 'Shopping'),
-(4, 'Queenbeer123', '-41.289642', '174.780378', 'baju'),
-(8, 'Crooz', '-41.29464', '174.782009', 'baju');
+INSERT INTO `bangunan` (`bangunan_id`, `bangunan_nama`, `bangunan_lat`, `bangunan_long`, `keterangan`, `gambar`) VALUES
+(1, 'Queenstown', '-45.039843', '168.673639', 'Queenstown adalah sebuah kota yang berada di South Island. Kota ini memiliki reputasi yang sangat terkenal sebagai pusat tempat petualangan di New Zealand. Jika kamu berkunjung ke tempat ini saat musim dingin, maka kamu bisa mencoba bermain ski di tempat ', 'queenstown.jpg'),
+(2, 'Hobitton', '-37.8700757', '175.6746189', 'Kalau kamu adalah penggemar film The Lord of the Rings atau The Hobbit, maka kamu wajib banget buat datang ke Matamata. Di sini kamu bisa merasakan hidup di kampung hobbit alias Hobbiton yang ada di dalam kedua film itu.', 'Hobbiton.jpg'),
+(3, 'Christchurch', '-43.5264199', '172.629163', 'Salah satu destinasi wisata yang terkenal di kota ini adalah Christchurch Botanic Gardens yang merupakan sebuah taman botani. Di sini kamu bisa melihat pohon tertua, tertinggi, dan terbesar yang ada di New Zealand.', 'Christchurch.jpg');
 
 -- --------------------------------------------------------
 
@@ -91,13 +92,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `bangunan`
 --
 ALTER TABLE `bangunan`
-  MODIFY `bangunan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `bangunan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

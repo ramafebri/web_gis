@@ -123,10 +123,10 @@ class MapPolygon extends CI_Controller {
 
 		$result = $this->MapPolygonModel->addPolygon($data);
 		if($result){
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon');
 		}else{
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon');
 		}
 	}
 	
@@ -136,10 +136,10 @@ class MapPolygon extends CI_Controller {
         $result = $this->MapPolygonModel->deletePolygon($polygon_id);
 		if($result){
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon');
 		}else{
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon');
 		}
 	}
 
@@ -147,10 +147,10 @@ class MapPolygon extends CI_Controller {
         $result = $this->MapPolygonModel->deleteAll();
 		if($result){
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon');
 		}else{
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+		    redirect('page/data_landmark_polygon_polygon');
 		}
 	}
 
@@ -179,10 +179,10 @@ class MapPolygon extends CI_Controller {
 		$result = $this->MapPolygonModel->updatePolygon($data);
 		if($result){
             $this->session->set_flashdata('success', 'Berhasil disimpan');
-		    redirect('page/v_home');
+		    redirect('page/data_landmark_polygon');
 		}else{
             echo '<script>alert("Region already added");</script>';
-		    redirect('page/v_home'); 
+		    redirect('page/data_landmark_polygon'); 
 		}
 	}
 

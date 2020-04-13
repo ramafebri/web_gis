@@ -50,7 +50,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark') ?>">Landmark</a>
+            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark') ?>">Landmark Marker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark_polygon') ?>">Landmark Polygon</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/auth/logout') ?>">Logout</a>

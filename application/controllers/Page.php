@@ -12,14 +12,18 @@ class Page extends MY_Controller {
   
   public function v_home(){
     $level = $this->session->userdata('level');
+    $result = $this->UserModel->get();
+
+    $data['user'] = $result;
+
     if($level == 'admin'){
-      $this->load->view('v_home');
+      $this->load->view('v_home', $data);
     }
     else if($level == 'operator'){
-      $this->load->view('v_home_operator');
+      $this->load->view('v_home_operator', $data);
     }
     else{
-      $this->load->view('v_home_regular');
+      $this->load->view('v_home_regular', $data);
     }
   }
 

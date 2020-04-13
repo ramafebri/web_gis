@@ -234,7 +234,7 @@
 	.modal form label {
 		font-weight: normal;
 	}
-	#map { height: 200px; }
+	#map { height: 200px;}
 	#mapedit { height: 200px; }
     }	
 </style>
@@ -280,7 +280,7 @@
 						<h2>Landmark <b>Data</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addLandmarkModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Landmark</span></a>
+						<a href='#addLandmarkModal' onclick="addFunction()" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Landmark</span></a>
 						<a href="#deleteLandmarkModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete All</span></a>						
 					</div>
                 </div>
@@ -307,7 +307,7 @@
 						<td><?php echo $landmarks->information?></td>
 						<td><img src='<?=base_url()?>assets/uploads/<?php echo $landmarks->photo?>' alt='maptime logo gif' width='100px' height='70px'/></td>
                         <td>
-                            <a href="#editLandmarkModal" class="edit" data-toggle="modal" onclick="getData('<?php echo $landmarks->id_polygon?>', '<?php echo $landmarks->name_polygon?>', '<?php echo $landmarks->coordinates?>', '<?php echo $landmarks->information?>', '<?php echo $landmarks->photo?>')"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#editLandmarkModal" class="edit" onclick="getData('<?php echo $landmarks->id_polygon?>', '<?php echo $landmarks->name_polygon?>', '<?php echo $landmarks->coordinates?>', '<?php echo $landmarks->information?>', '<?php echo $landmarks->photo?>')"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteLandmarkModalID" class="delete" data-toggle="modal" onclick="getID(<?php echo $landmarks->id_polygon?>)"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -319,8 +319,35 @@
             </div>
         </div>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 	<!-- ADD Modal HTML -->
-	<div id="addLandmarkModal" class="modal fade">
+	<div id="addLandmarkModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form action="<?=base_url()?>index.php/mappolygon/addPolygon1" method="POST" enctype="multipart/form-data">
@@ -357,8 +384,15 @@
 			</div>
 		</div>
 	</div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 	<!-- Edit Modal HTML -->
-	<div id="editLandmarkModal" class="modal fade">
+	<div id="editLandmarkModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form action="<?=base_url()?>index.php/mappolygon/updatePolygon1" method="POST" enctype="multipart/form-data">
@@ -396,6 +430,18 @@
 			</div>
 		</div>
 	</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 	<!-- Delete Modal HTML -->
 	<div id="deleteLandmarkModal" class="modal fade">
 		<div class="modal-dialog">
@@ -442,12 +488,8 @@
 	</div>
 </body>
    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-
-    <!-- Bootstrap core JavaScript -->
-	<script src="<?=base_url()?>assets/vendor/jquery/jquery.slim.min.js"></script>
-	<script src="<?=base_url()?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
 
   <script src="<?=base_url()?>assets/leaflet/leaflet.js"></script>
   <script src="<?=base_url()?>node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
@@ -523,7 +565,6 @@
         });
 
 	//Map for edit
-	var polygon1 = null;
 	var map1 = L.map('mapedit').setView([-41.2868811, 174.7723432], 13);
 
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -575,7 +616,7 @@
         var type = e.layerType,
             layer1 = e.layer;
         
-        polygon1 = layer.toGeoJSON()
+        polygon1 = layer1.toGeoJSON()
         var coordPolygon1 = JSON.stringify(polygon1.geometry.coordinates[0]);    
         
         var addPopup1 =  `Coordinates: `+coordPolygon1;
@@ -586,7 +627,7 @@
             'className' : 'custom'
             };
 
-            layer.bindPopup(addPopup1,customOptions1);
+            layer1.bindPopup(addPopup1,customOptions1);
 
         editableLayers1.addLayer(layer1);
         });
@@ -597,6 +638,7 @@
 
     var polygon2 = null;
 	function getData(id, name, coord, info, gambar){
+        document.getElementById("editLandmarkModal").scrollIntoView()
         var coords = JSON.parse(coord);
                     
         for(var x=0; x<coords.length; x++){
@@ -616,7 +658,15 @@
 
 	function deletePolygon(){
 		map1.removeLayer(polygon2);
-	}	
+    }
+
+    function addFunction() {
+        document.getElementById("addLandmarkModal").scrollIntoView()
+    }
     
   </script>
+
+      <!-- Bootstrap core JavaScript -->
+	<script src="<?=base_url()?>assets/vendor/jquery/jquery.slim.min.js"></script>
+	<script src="<?=base_url()?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>                                		                            

@@ -257,7 +257,7 @@
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark') ?>">Landmark</a>
+            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark') ?>">Landmark Marker</a>
           </li>
 		  <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark_polygon') ?>">Landmark Polygon</a>

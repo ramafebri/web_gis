@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Apr 2020 pada 13.45
+-- Waktu pembuatan: 13 Apr 2020 pada 18.11
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.4
 
@@ -41,9 +41,28 @@ CREATE TABLE `bangunan` (
 --
 
 INSERT INTO `bangunan` (`bangunan_id`, `bangunan_nama`, `bangunan_lat`, `bangunan_long`, `keterangan`, `gambar`) VALUES
-(1, 'Queenstown', '-45.039843', '168.673639', 'Queenstown adalah sebuah kota yang berada di South Island. Kota ini memiliki reputasi yang sangat terkenal sebagai pusat tempat petualangan di New Zealand. Jika kamu berkunjung ke tempat ini saat musim dingin, maka kamu bisa mencoba bermain ski di tempat ', 'queenstown.jpg'),
-(2, 'Hobitton', '-37.8700757', '175.6746189', 'Kalau kamu adalah penggemar film The Lord of the Rings atau The Hobbit, maka kamu wajib banget buat datang ke Matamata. Di sini kamu bisa merasakan hidup di kampung hobbit alias Hobbiton yang ada di dalam kedua film itu.', 'Hobbiton.jpg'),
-(3, 'Christchurch', '-43.5264199', '172.629163', 'Salah satu destinasi wisata yang terkenal di kota ini adalah Christchurch Botanic Gardens yang merupakan sebuah taman botani. Di sini kamu bisa melihat pohon tertua, tertinggi, dan terbesar yang ada di New Zealand.', 'Christchurch.jpg');
+(1, 'Queenstown', '-41.290957', '174.77834', 'Wisata', 'queenstown2.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bangunan_polygon`
+--
+
+CREATE TABLE `bangunan_polygon` (
+  `id_polygon` int(11) NOT NULL,
+  `name_polygon` varchar(255) NOT NULL,
+  `coordinates` text NOT NULL,
+  `information` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `bangunan_polygon`
+--
+
+INSERT INTO `bangunan_polygon` (`id_polygon`, `name_polygon`, `coordinates`, `information`, `photo`) VALUES
+(16, 'Danau', '[[174.780185,-41.290507],[174.781172,-41.289636],[174.782653,-41.289604],[174.783254,-41.290201],[174.783275,-41.291023],[174.782696,-41.291474],[174.780185,-41.290507]]', 'baju', 'queenstown1.jpg');
 
 -- --------------------------------------------------------
 
@@ -79,6 +98,12 @@ ALTER TABLE `bangunan`
   ADD PRIMARY KEY (`bangunan_id`);
 
 --
+-- Indeks untuk tabel `bangunan_polygon`
+--
+ALTER TABLE `bangunan_polygon`
+  ADD PRIMARY KEY (`id_polygon`);
+
+--
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
@@ -92,7 +117,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `bangunan`
 --
 ALTER TABLE `bangunan`
-  MODIFY `bangunan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `bangunan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `bangunan_polygon`
+--
+ALTER TABLE `bangunan_polygon`
+  MODIFY `id_polygon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

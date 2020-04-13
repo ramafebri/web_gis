@@ -26,5 +26,5 @@ http://localhost/web_gis/
 ```
 
 ## ERD
-![Image of ERD](erd.png)>![Image of ERD](erd.png)
+![Image of ERD](erd.png)
 

@@ -5,15 +5,17 @@ Geographic Information System based on web. Made with Code Igniter 3 and Leaflet
 
 Features of this web app:
 1. CRUD Marker on MAP <br>
-2. CRUD User <br>
-3. 3 level of user (admin, operator and regular user) <br>
-4. Login <br>
-5. Logout <br>
-6. Register <br>
-7. Profile Page <br>
-8. Export data landmark to Excel <br>
-9. Export data user to Excel <br>
-10. Add photo on marker
+2. CRUD Polygon on MAP <br>
+3. CRUD User <br>
+4. 3 level of user (admin, operator and regular user) <br>
+5. Login <br>
+6. Logout <br>
+7. Register <br>
+8. Profile Page <br>
+9. Export data landmark to Excel <br>
+10. Export data user to Excel <br>
+11. Add photo on marker
+11. Add photo on polygon
 
 ## Installation
 1. Clone or download this repositroy <br>
@@ -24,3 +26,7 @@ Features of this web app:
 ```bash
 http://localhost/web_gis/
 ```
+
+## ERD
+![Image of ERD](erd.jpg)
+

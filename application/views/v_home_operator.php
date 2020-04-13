@@ -188,11 +188,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             layer = e.layer;
         
         polygon = layer.toGeoJSON()
-        var coordMarker = JSON.stringify(polygon.geometry.coordinates);
+        var coordMarkerLat = JSON.stringify(polygon.geometry.coordinates[1]);
+        var coordMarkerLong = JSON.stringify(polygon.geometry.coordinates[0]);
         var coordPolygon = JSON.stringify(polygon.geometry.coordinates[0]);    
         
         if(type === 'marker'){
-            var addPopup =  `<h3>Add Landmark</h3>`+coordMarker+
+            var addPopup =  `<h3>Add Landmark</h3>`+coordMarkerLat+", "+coordMarkerLong+
             `<form action="<?=base_url()?>index.php/map/addMarker" method="POST" enctype="multipart/form-data"> 
                 <label for="landmark_nama">Name:</label><br>
                     <input type="text" id="l_name" name="l_name" required><br> 

@@ -24,3 +24,7 @@ Features of this web app:
 ```bash
 http://localhost/web_gis/
 ```
+
+## ERD
+![Image of ERD](erd.png)>![Image of ERD](erd.png)
+

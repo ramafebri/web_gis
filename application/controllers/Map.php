@@ -24,6 +24,24 @@ class Map extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function getGeojson(){
+		$data=$this->db->get('geojson')->result();
+		echo json_encode($data);
+	}
+
+	public function addGeojson(){
+		$data["array"] = $this->input->post('coordinates');
+
+		$result = $this->MapModel->addgeojson($data);
+		if($result){
+            echo '<script>alert("Region already added");</script>';
+		    redirect('page/v_home');
+		}else{
+            echo '<script>alert("Region already added");</script>';
+		    redirect('page/v_home');
+		}
+	}
+
 	//<-Function which used in Map -> 
 	public function addMarker(){
 		$foto = $_FILES['l_foto'];

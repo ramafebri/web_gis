@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"> -->
 
   <link href="<?=base_url()?>assets/leaflet/leaflet.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?=base_url()?>node_modules/leaflet-draw/dist/leaflet.draw.css"/>
 
   <!-- Bootstrap core CSS -->
   <link href="<?=base_url()?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -75,11 +76,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="<?=base_url()?>assets/leaflet/leaflet.js"></script>
+  <script src="<?=base_url()?>node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
 
   <script type="text/javascript">
 
     var map = L.map('mapid').setView([-41.2868811, 174.7723432], 13);
-    map.on('click', addMarker);
 
     var base_url = "<?=base_url()?>";
 
@@ -89,7 +90,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }).addTo(map);
     
     var myFeatureGroup = L.featureGroup().addTo(map);
-    var bangunanMarker;
 
     $.getJSON("<?=base_url()?>index.php/map/bangunan_json", function(result){
       $.each(result, function(i, field){
@@ -102,39 +102,140 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
 
       // create popup contents
-      var customPopup = "<center><h5><b>Landmark Information</b></h5></center><br>"+'<h7>Name: </h7>'+result[i].bangunan_nama+"<br/>"+"<img src='<?=base_url()?>assets/uploads/"+result[i].gambar+"' alt='map photo' width='350px'/><br><h7>Detail : </h7>"+result[i].keterangan"";
+      var customPopup = "<center><h5><b>Landmark Information</b></h5></center>"+'<h7>Name: </h7>'+result[i].bangunan_nama+"<br/>"+"<img src='<?=base_url()?>assets/uploads/"+result[i].gambar+"' alt='map photo' width='350px'/><br><h7>Detail : </h7>"+result[i].keterangan;
 
       // specify popup options 
       var customOptions =
           {
-          'maxWidth': '1000',
+          'maxWidth': '500',
+          'maxHeight': '1000',
           'className' : 'custom'
           }
 
-        bangunanMarker = L.marker([v_lat,v_long],{icon:icon_bangunan}).bindPopup(customPopup,customOptions).addTo(myFeatureGroup)
-
-        bangunanMarker.id =  result[i].bangunan_id;
+      var bangunanMarker = L.marker([v_lat,v_long],{icon:icon_bangunan}).bindPopup(customPopup,customOptions).addTo(myFeatureGroup)
       });
     });
 
-    function addMarker(e){
-      // Add marker to map at click location; add popup window
-      var latlng = e.latlng.toString();
-      lat = latlng.substr(7,10);
-      long = latlng.substr(20,15); 
-  
-      alert(e.latlng);
+    $.getJSON("<?=base_url()?>index.php/mappolygon/getPolygon", function(result){
+        $.each(result, function(i, field){
+          var coordinates =  JSON.parse(result[i].coordinates)
+              for(var x=0; x<coordinates.length; x++){
+                  coordinates[x] = [coordinates[x][1], coordinates[x][0]]
+              }
 
-      var addPopup =  "<h5>Add Landmark</h5><br>"+latlng+"<form action=\"<?=base_url()?>index.php/map/addMarker\" method=\"POST\" enctype=\"multipart/form-data\"> <label for=\"landmark_nama\">Name:</label><br><input type=\"text\" id=\"l_name\" name=\"l_name\" required><br>\ <label for=\"landmark_latitude\">Latitude:</label><br><input type=\"text\" id=\"l_lat\" name=\"l_lat\" required><br><label for=\"landmark_longitude\">Longitude:</label><br><input type=\"text\" id=\"l_long\" name=\"l_long\" required><br><label for=\"landmark_info\">Detail Information:</label><br><input type=\"text\" id=\"l_info\" name=\"l_info\" required><br><label for=\"landmark_foto\">Photo:</label><br><input type=\"file\" id=\"l_foto\" name=\"l_foto\" required><br><br><input type=\"submit\" value=\"Submit\"></form>";
-      
-      var customOptions =
-        {
-          'maxWidth': '500',
-          'className' : 'custom'
+              // create popup contents
+              var customPopup = "<center><h3><b>Landmark Information</b></h3></center>"+'<h7>Name: </h7>'+result[i].name_polygon+"<br/>"+"<img src='<?=base_url()?>assets/uploads/"+result[i].photo+"' alt='map photo' width='350px'/><br><h7>Detail : </h7>"+result[i].information;
+
+              // specify popup options 
+              var customOptions =
+                  {
+                  'maxWidth': '500',
+                  'maxHeight': '1000',
+                  'className' : 'custom'
+                  }
+
+              var polygon = L.polygon(coordinates).bindPopup(customPopup,customOptions).addTo(map);
+        });
+    });
+
+    //Add function to Polygon or Marker
+        // Initialise the FeatureGroup to store editable layers
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+
+        var drawPluginOptions = {
+        position: 'topright',
+        draw: {
+            polygon: {
+            allowIntersection: false, // Restricts shapes to simple polygons
+            drawError: {
+                color: '#e1e100', // Color the shape will turn when intersects
+                message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+            },
+            shapeOptions: {
+                color: '#97009c'
+            }
+            },
+            // disable toolbar item by setting it to false
+            polyline: false,
+            circle: false, // Turns off this drawing tool
+            circlemarker: false,
+            rectangle: false,
+            marker: true,
+            },
+        edit: {
+            featureGroup: editableLayers, //REQUIRED!!
+            remove: false
+        }
         };
 
-      var newMarker = new L.marker(e.latlng).bindPopup(addPopup,customOptions).addTo(map);
-    }
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw(drawPluginOptions);
+        map.addControl(drawControl);
+
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+        //editableLayers.on('click', addMarker);
+
+        var polygon = null;
+        //Function to send coordinates to Database
+        map.on('draw:created', function(e) {
+
+        var type = e.layerType,
+            layer = e.layer;
+        
+        polygon = layer.toGeoJSON()
+        var coordMarker = JSON.stringify(polygon.geometry.coordinates);
+        var coordPolygon = JSON.stringify(polygon.geometry.coordinates[0]);    
+        
+        if(type === 'marker'){
+            var addPopup =  `<h3>Add Landmark</h3>`+coordMarker+
+            `<form action="<?=base_url()?>index.php/map/addMarker" method="POST" enctype="multipart/form-data"> 
+                <label for="landmark_nama">Name:</label><br>
+                    <input type="text" id="l_name" name="l_name" required><br> 
+                <label for="landmark_latitude">Latitude:</label><br>
+                    <input type="text" id="l_lat" name="l_lat" required><br>
+                <label for="landmark_longitude">Longitude:</label><br>
+                    <input type="text" id="l_long" name="l_long" required><br>
+                <label for="landmark_info">Detail Information:</label><br>
+                    <input type="text" id="l_info" name="l_info" required><br>
+                <label for="landmark_foto">Photo:</label><br>
+                    <input type="file" id="l_foto" name="l_foto" required><br><br>
+                    <input type="submit" value="Submit">
+            </form>`;  
+                
+            var customOptions =
+                {
+                'maxWidth': '500',
+                'className' : 'custom'
+                };
+            layer.bindPopup(addPopup,customOptions);    
+        }
+        else if(type === 'polygon'){
+        var addPopup =  `<h3>Add Landmark</h3>`+coordPolygon+`
+          <form action="<?=base_url()?>index.php/mappolygon/addPolygon" method="POST" enctype="multipart/form-data"> 
+              <label for="landmark_nama">Name:</label><br>
+                  <input type="text" id="l_name" name="l_name" required><br>
+              <label for="landmark_coordinates">Coordinates:</label><br>    
+                  <input type="text" id="l_coord" name="coordinates" required><br> 
+              <label for="landmark_info">Detail Information:</label><br>
+                  <input type="text" id="l_info" name="l_info" required><br>
+              <label for="landmark_foto">Photo:</label><br>
+                  <input type="file" id="l_foto" name="l_foto" required><br><br>
+              <input type="submit" value="Submit">
+          </form>`;
+      
+        var customOptions =
+            {
+            'maxWidth': '500',
+            'className' : 'custom'
+            };
+
+            layer.bindPopup(addPopup,customOptions);
+        }
+
+        editableLayers.addLayer(layer);
+        });
   </script>
 
     <!-- Bootstrap core JavaScript -->

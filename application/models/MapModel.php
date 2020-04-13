@@ -7,10 +7,22 @@ class MapModel extends CI_Model {
         return $result;
     }
 
+    public function getAllGeoJSON(){
+        $q = $this->db->get('geojson');
+        
+        return $q->result();
+      }
+
     public function getbyID($bangunan_id)
     {
         $this->db->where(['bangunan_id' => $bangunan_id]);
         $result = $this->db->get('bangunan')->row();
+        return $result;
+    }
+
+    public function addgeojson($data)
+    {
+        $result = $this->db->insert('geojson',$data);
         return $result;
     }
 

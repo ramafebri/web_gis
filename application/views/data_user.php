@@ -193,6 +193,9 @@ $(document).ready(function(){
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark') ?>">Landmark</a>
           </li>
+		  <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('index.php/page/data_landmark_polygon') ?>">Landmark Polygon</a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="<?php echo base_url('index.php/page/data_user') ?>">User</a>
           </li>
@@ -315,7 +318,7 @@ $(document).ready(function(){
                         </div>
                         <div class="form-group">
                             <label>Level</label>
-							<select id="cars" class="form-control" name="u_level" id="level_User">
+							<select class="form-control" name="u_level" id="level_User">
 								<option value="admin">Admin</option>
 								<option value="operator">Operator</option>
 								<option value="regular">Regular</option>

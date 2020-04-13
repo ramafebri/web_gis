@@ -144,7 +144,7 @@
         </div>
             <input type="hidden" name="l_id" value="<?php echo $id ?>" />
         <div class="item">
-          <p><b>Nama Landmark</b></p>
+          <p><b>Landmark Name</b></p>
             <input type="text" name="l_name" value="<?php echo $name ?>" required />
         </div>
         <div class="container">
@@ -170,8 +170,8 @@
           <input type="text" name="l_info" value="<?php echo $info ?>" required/>
         </div>
         <div class="item">
-          <p><b>Foto</b></p>
-          <input type="file" name="l_foto" value="" required/>
+          <p><b>Photo</b></p>
+          <input type="file" name="l_foto" value="<?=base_url()?>assets/uploads/<?php echo $photo ?>" required/>
         </div>
         <div class="btn-block">
           <button type="submit" href="/">APPLY</button>

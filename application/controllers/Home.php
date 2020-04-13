@@ -15,4 +15,8 @@ class Home extends CI_Controller {
 	public function register(){
 		$this->load->view('register');
 	}
+
+	public function test(){
+		$this->load->view('test');
+	}
 }

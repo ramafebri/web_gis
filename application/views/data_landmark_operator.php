@@ -393,7 +393,7 @@
                         </div>
 						<div class="form-group">
 							<label>Photo</label>
-							<input type="file" class="form-control" name="l_foto" required>
+							<input type="file" class="form-control" name="l_foto">
 						</div>										
 					</div>
 					<div class="modal-footer">

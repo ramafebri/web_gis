@@ -88,7 +88,22 @@ class Map extends CI_Controller {
 
 	public function updateMarker(){
 		$foto = $_FILES['l_foto'];
-		if($foto == ''){
+
+		if($foto['name'] == ''){
+			$data['bangunan_id'] = $this->input->post('l_id');
+			$data['bangunan_nama'] = $this->input->post('l_name');
+			$data['bangunan_lat'] = $this->input->post('l_lat'); 
+			$data['bangunan_long'] = $this->input->post('l_long');
+			$data['keterangan'] = $this->input->post('l_info');
+			   
+			$result = $this->MapModel->updateMarkers($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/v_home');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/v_home'); 
+			}
 
 		}else{
 			$config['upload_path']          = './assets/uploads/';
@@ -100,22 +115,21 @@ class Map extends CI_Controller {
 			}else{
 				echo "upload gagal";
 			}
-		}
-
-		$data['bangunan_id'] = $this->input->post('l_id');
-		$data['bangunan_nama'] = $this->input->post('l_name');
-		$data['bangunan_lat'] = $this->input->post('l_lat'); 
-		$data['bangunan_long'] = $this->input->post('l_long');
-		$data['keterangan'] = $this->input->post('l_info');
-		$data['gambar'] = $foto;
-		   
-		$result = $this->MapModel->updateMarkers($data);
-		if($result){
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-		    redirect('page/v_home');
-		}else{
-            echo '<script>alert("Region already added");</script>';
-		    redirect('page/v_home'); 
+			$data['bangunan_id'] = $this->input->post('l_id');
+			$data['bangunan_nama'] = $this->input->post('l_name');
+			$data['bangunan_lat'] = $this->input->post('l_lat'); 
+			$data['bangunan_long'] = $this->input->post('l_long');
+			$data['keterangan'] = $this->input->post('l_info');
+			$data['gambar'] = $foto;
+			   
+			$result = $this->MapModel->updateMarkers($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/v_home');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/v_home'); 
+			}
 		}
 	}
 	//<-Function which used in Map ->
@@ -178,7 +192,22 @@ class Map extends CI_Controller {
 
 	public function updateMarker1(){
 		$foto = $_FILES['l_foto'];
-		if($foto == ''){
+
+		if($foto['name'] == ''){
+			$data['bangunan_id'] = $this->input->post('l_id');
+			$data['bangunan_nama'] = $this->input->post('l_name');
+			$data['bangunan_lat'] = $this->input->post('l_lat'); 
+			$data['bangunan_long'] = $this->input->post('l_long');
+			$data['keterangan'] = $this->input->post('l_info');
+			   
+			$result = $this->MapModel->updateMarkers($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/data_landmark');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/data_landmark'); 
+			}
 
 		}else{
 			$config['upload_path']          = './assets/uploads/';
@@ -190,22 +219,21 @@ class Map extends CI_Controller {
 			}else{
 				echo "upload gagal";
 			}
-		}
-
-		$data['bangunan_id'] = $this->input->post('l_id');
-		$data['bangunan_nama'] = $this->input->post('l_name');
-		$data['bangunan_lat'] = $this->input->post('l_lat'); 
-		$data['bangunan_long'] = $this->input->post('l_long');
-		$data['keterangan'] = $this->input->post('l_info');
-		$data['gambar'] = $foto;
-		   
-		$result = $this->MapModel->updateMarkers($data);
-		if($result){
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-		    redirect('page/data_landmark');
-		}else{
-            echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark');
+			$data['bangunan_id'] = $this->input->post('l_id');
+			$data['bangunan_nama'] = $this->input->post('l_name');
+			$data['bangunan_lat'] = $this->input->post('l_lat'); 
+			$data['bangunan_long'] = $this->input->post('l_long');
+			$data['keterangan'] = $this->input->post('l_info');
+			$data['gambar'] = $foto;
+			   
+			$result = $this->MapModel->updateMarkers($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/data_landmark');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/data_landmark'); 
+			}
 		}
 	}
 

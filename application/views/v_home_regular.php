@@ -66,6 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="col-md-12">
       <br>
       <br>
+        <center><h2>New Zealand</h2></center> 
         <h3>Map</h3> 
 	  	  <div id="mapid"></div> 
       </div>

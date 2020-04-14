@@ -68,7 +68,20 @@ class MapPolygon extends CI_Controller {
 
 	public function updatePolygon(){
         $foto = $_FILES['l_foto'];
-		if($foto == ''){
+		if($foto['name'] == ''){
+			$data['id_polygon'] = $this->input->post('l_id');
+			$data['name_polygon'] = $this->input->post('l_name');
+			$data["coordinates"] = $this->input->post('coordinates');
+			$data['information'] = $this->input->post('l_info');
+			   
+			$result = $this->MapPolygonModel->updatePolygon($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/v_home');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/v_home'); 
+			}
 
 		}else{
 			$config['upload_path']          = './assets/uploads/';
@@ -80,21 +93,21 @@ class MapPolygon extends CI_Controller {
 			}else{
 				echo "upload gagal";
 			}
-		}
 
-		$data['id_polygon'] = $this->input->post('l_id');
-		$data['name_polygon'] = $this->input->post('l_name');
-		$data["coordinates"] = $this->input->post('coordinates');
-		$data['information'] = $this->input->post('l_info');
-		$data['photo'] = $foto;
-		   
-		$result = $this->MapPolygonModel->updatePolygon($data);
-		if($result){
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-		    redirect('page/v_home');
-		}else{
-            echo '<script>alert("Region already added");</script>';
-		    redirect('page/v_home'); 
+			$data['id_polygon'] = $this->input->post('l_id');
+			$data['name_polygon'] = $this->input->post('l_name');
+			$data["coordinates"] = $this->input->post('coordinates');
+			$data['information'] = $this->input->post('l_info');
+			$data['photo'] = $foto;
+			   
+			$result = $this->MapPolygonModel->updatePolygon($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/v_home');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/v_home'); 
+			}
 		}
 	}
 	//<-Function which used in Map ->
@@ -155,8 +168,21 @@ class MapPolygon extends CI_Controller {
 	}
 
 	public function updatePolygon1(){
-		$foto = $_FILES['l_foto'];
-		if($foto == ''){
+        $foto = $_FILES['l_foto'];
+		if($foto['name'] == ''){
+			$data['id_polygon'] = $this->input->post('l_id');
+			$data['name_polygon'] = $this->input->post('l_name');
+			$data["coordinates"] = $this->input->post('coordinates');
+			$data['information'] = $this->input->post('l_info');
+			   
+			$result = $this->MapPolygonModel->updatePolygon($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/data_landmark_polygon');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/data_landmark_polygon'); 
+			}
 
 		}else{
 			$config['upload_path']          = './assets/uploads/';
@@ -168,21 +194,21 @@ class MapPolygon extends CI_Controller {
 			}else{
 				echo "upload gagal";
 			}
-		}
 
-		$data['id_polygon'] = $this->input->post('l_id');
-		$data['name_polygon'] = $this->input->post('l_name');
-		$data["coordinates"] = $this->input->post('coordinates');
-		$data['information'] = $this->input->post('l_info');
-		$data['photo'] = $foto;
-		   
-		$result = $this->MapPolygonModel->updatePolygon($data);
-		if($result){
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-		    redirect('page/data_landmark_polygon');
-		}else{
-            echo '<script>alert("Region already added");</script>';
-		    redirect('page/data_landmark_polygon'); 
+			$data['id_polygon'] = $this->input->post('l_id');
+			$data['name_polygon'] = $this->input->post('l_name');
+			$data["coordinates"] = $this->input->post('coordinates');
+			$data['information'] = $this->input->post('l_info');
+			$data['photo'] = $foto;
+			   
+			$result = $this->MapPolygonModel->updatePolygon($data);
+			if($result){
+				$this->session->set_flashdata('success', 'Berhasil disimpan');
+				redirect('page/data_landmark_polygon');
+			}else{
+				echo '<script>alert("Region already added");</script>';
+				redirect('page/data_landmark_polygon'); 
+			}
 		}
 	}
 

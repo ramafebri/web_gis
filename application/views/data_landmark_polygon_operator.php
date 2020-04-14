@@ -416,7 +416,7 @@
                         </div>
 						<div class="form-group">
 							<label>Photo</label>
-							<input type="file" class="form-control" name="l_foto" id="foto_landmark" value="" required>
+							<input type="file" class="form-control" name="l_foto" id="foto_landmark" value="">
 						</div>										
 					</div>
 					<div class="modal-footer">

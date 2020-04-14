@@ -166,7 +166,7 @@
         </div>
         <div class="item">
           <p><b>Photo</b></p>
-          <input type="file" name="l_foto" value="<?=base_url()?>assets/uploads/<?php echo $photo ?>" required/>
+          <input type="file" name="l_foto" value="<?=base_url()?>assets/uploads/<?php echo $photo ?>"/>
         </div>
         <div class="btn-block">
           <button type="submit" href="/">APPLY</button>

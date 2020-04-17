@@ -14,8 +14,10 @@ Features of this web app:
 8. Profile Page <br>
 9. Export data landmark to Excel <br>
 10. Export data user to Excel <br>
-11. Add photo on marker
-11. Add photo on polygon
+11. Export data landmark to PDF <br>
+12. Export data user to PDF <br>
+13. Add photo on marker
+14. Add photo on polygon
 
 ## Installation
 1. Clone or download this repositroy <br>

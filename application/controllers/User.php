@@ -15,6 +15,7 @@ class User extends CI_Controller {
 	{
         parent::__construct();
 		$this->load->model('UserModel');
+		$this->load->library('pdf');
 	}
 	
 	//<-Function which used in User Page ->
@@ -144,6 +145,57 @@ class User extends CI_Controller {
 			$writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 			$writer->save('php://output');
 			exit;
+		}
+
+		function exportPDF(){
+			$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+			$pdf->setPrintFooter(false);
+			$pdf->setPrintHeader(false);
+			$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+			$pdf->AddPage('');
+			$pdf->Write(0, 'User Data', '', 0, 'L', true, 0, false, false, 0);
+			$pdf->SetFont('');
+			
+			$data = $this->db->get('user')->result();
+	
+			$html = '
+			<html>
+				<head>
+					<style>
+					table, th, td {
+					border: 1px solid black;
+					}
+					</style>
+				</head>
+				<body>
+					<table>
+					<tr>
+						<th>Id User</th>
+						<th>Name</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Level</th>
+					</tr>
+			';
+	
+			foreach($data as $user) {
+				$html .= '
+				<tr>
+					<td>'. $user->id_user .'</td>
+					<td>'. $user->name .'</td>
+					<td>'. $user->username .'</td>
+					<td>'. $user->password .'</td>
+					<td>'. $user->level .'</td>
+				</tr>';
+			}
+			
+			$html .= '</table>
+				</body>
+			</html>
+			';
+			$pdf->writeHTML($html, true, false, true, false, '');
+			
+			$pdf->Output('User Data.pdf', 'I');
 		}
 
 	//<-Function which used in User Page ->

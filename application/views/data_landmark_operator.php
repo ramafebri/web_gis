@@ -315,7 +315,7 @@
                 </tbody>
             </table>
 			<div class="clearfix">
-				<div class="hint-text">Showing <b>all</b> data <br><a href="<?php echo base_url() ?>index.php/map/export">Export to Excel</a></div>	
+			<div class="hint-text">Showing <b>all</b> data <br><a href="<?php echo base_url() ?>index.php/map/export">Export to Excel</a>&nbsp;&nbsp;&nbsp;<a href="<?php echo base_url() ?>index.php/map/exportPDF">Export to PDF</a></div>	
             </div>
         </div>
     </div>

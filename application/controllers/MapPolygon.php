@@ -16,6 +16,7 @@ class MapPolygon extends CI_Controller {
 		parent::__construct();
 		$this->load->model('MapPolygonModel');
 		$this->load->library('form_validation');
+		$this->load->library('pdf');
 	}
 
 	public function getPolygon(){
@@ -279,5 +280,56 @@ class MapPolygon extends CI_Controller {
 		$writer->save('php://output');
 		exit;
 	}
+
+	function exportPDF(){
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->setPrintFooter(false);
+        $pdf->setPrintHeader(false);
+        $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+        $pdf->AddPage('');
+        $pdf->Write(0, 'New Zealand Polygon', '', 0, 'L', true, 0, false, false, 0);
+        $pdf->SetFont('');
+		
+		$data = $this->db->get('bangunan_polygon')->result();
+
+		$html = '
+		<html>
+			<head>
+				<style>
+				table, th, td {
+				border: 1px solid black;
+				}
+				</style>
+			</head>
+			<body>
+				<table>
+				<tr>
+					<th>Id Polygon</th>
+					<th>Name</th>
+					<th>Coordinates</th>
+					<th>Detail Information</th>
+					<th>Photo</th>
+				</tr>
+		';
+
+		foreach($data as $landmarks) {
+			$html .= '
+			<tr>
+				<td>'. $landmarks->id_polygon .'</td>
+				<td>'. $landmarks->name_polygon .'</td>
+				<td>'. $landmarks->coordinates .'</td>
+				<td>'. $landmarks->information .'</td>
+				<td><img src="./assets/uploads/'. $landmarks->photo .'" alt="maptime logo gif" width="100px" height="70px"/></td>
+			</tr>';
+		}
+		
+		$html .= '</table>
+			</body>
+		</html>
+		';
+		$pdf->writeHTML($html, true, false, true, false, '');
+		
+        $pdf->Output('Nez-Zealand-Polygon.pdf', 'I');
+    }
 	//<-Function which used in Landmark Page ->
 }

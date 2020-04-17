@@ -84,6 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="<?=base_url()?>assets/leaflet/leaflet.js"></script>
   <script src="<?=base_url()?>node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
+  <script src="<?=base_url()?>assets/leaflet-kml-master/L.KML.js"></script>
 
   <script type="text/javascript">
 
@@ -95,6 +96,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 100
     }).addTo(map);
+
+                // Load kml file
+                fetch('<?=base_url()?>assets/kml-file/Semua-Kecamatan-di-Kabupaten-Klaten.kml')
+                .then(res => res.text())
+                .then(kmltext => {
+                    // Create new kml overlay
+                    const parser = new DOMParser();
+                    const kml = parser.parseFromString(kmltext, 'text/xml');
+                    const track = new L.KML(kml);
+                    map.addLayer(track);
+
+                    // Adjust map to show the kml
+                    const bounds = track.getBounds();
+                    map.fitBounds(bounds);
+                });
     
     var myFeatureGroup = L.featureGroup().addTo(map);
 
